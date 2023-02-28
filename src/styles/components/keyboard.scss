@@ -1,0 +1,87 @@
+.keyboard {
+	padding-top: 100px;
+	color: #fff;
+	font-size: 20px;
+
+	&__container {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__body {
+		width: 1010px;
+		margin: 0 auto;
+		display: inline-flex;
+		flex-direction: column;
+		row-gap: 10px;
+		// margin: 0 auto;
+		border: 2px solid white;
+		border-radius: 4px;
+		padding: 10px;
+	}
+
+	&__line {
+		display: flex;
+		flex: 1 1 auto;
+		column-gap: 10px;
+	}
+
+	.key {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 60px;
+		// width: 60px;
+		flex: 0 0 60px;
+		border-radius: 4px;
+		border: 2px solid white;
+		padding: 4px;
+		cursor: pointer;
+		transition: all 0.3s ease 0s;
+
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: rgba(59, 59, 148, 0.884);
+				border: 2px solid rgba(59, 59, 148, 0.884);
+			}
+		}
+
+		&.active {
+			background-color: rgba(59, 59, 148, 0.884);
+			border: 2px solid rgba(59, 59, 148, 0.884);
+		}
+	}
+
+	.backspace {
+		width: 80px;
+	}
+
+	.backspace,
+	.tab,
+	.capsLock,
+	.enter,
+	.ctrl,
+	.fn,
+	.alt,
+	.win {
+		font-size: 14px;
+	}
+
+	.tab {
+		// width: 80px;
+		flex: 0 0 80px;
+	}
+
+	.capsLock {
+		// width: 100px;
+		flex: 0 0 100px;
+	}
+
+	.enter {
+		flex: 0 0 110px;
+	}
+
+	.space {
+		flex: 1 1 auto;
+	}
+}
