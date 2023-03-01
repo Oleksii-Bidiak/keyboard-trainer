@@ -24,7 +24,7 @@ export const KeyBoard = () => {
     ["w", "key"],
     ["e", "key"],
     ["r", "key"],
-    ["y", "key"],
+    ["t", "key"],
     ["y", "key"],
     ["u", "key"],
     ["i", "key"],

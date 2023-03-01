@@ -12,12 +12,9 @@
 	}
 
 	&__body {
-		width: 1010px;
-		margin: 0 auto;
-		display: inline-flex;
-		flex-direction: column;
-		row-gap: 10px;
 		// margin: 0 auto;
+		max-width: 1012px;
+		width: 100%;
 		border: 2px solid white;
 		border-radius: 4px;
 		padding: 10px;
@@ -25,8 +22,11 @@
 
 	&__line {
 		display: flex;
-		flex: 1 1 auto;
 		column-gap: 10px;
+
+		&:not(:last-child) {
+			margin-bottom: 10px;
+		}
 	}
 
 	.key {
@@ -73,12 +73,10 @@
 	}
 
 	.tab {
-		// width: 80px;
 		flex: 0 0 80px;
 	}
 
 	.capsLock {
-		// width: 100px;
 		flex: 0 0 100px;
 	}
 
@@ -87,7 +85,7 @@
 	}
 
 	.space {
-		flex: 1 1 auto;
+		flex: 0 0 356px;
 	}
 
 	.lshift {
@@ -95,7 +93,7 @@
 	}
 
 	.rshift {
-		flex: 1 1 auto;
+		flex: 0 0 160px;
 	}
 }
 
