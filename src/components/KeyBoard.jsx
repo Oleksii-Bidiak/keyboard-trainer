@@ -32,6 +32,7 @@ export const KeyBoard = () => {
     ["p", "key"],
     ["[", "key"],
     ["]", "key"],
+    ["  ", "key"],
   ];
   const row3 = [
     ["CapsLock", "key capsLock"],
@@ -49,7 +50,7 @@ export const KeyBoard = () => {
     ["Enter", "key enter"],
   ];
   const row4 = [
-    ["Shift", "key rshift"],
+    ["Shift", "key lshift"],
     ["z", "key"],
     ["x", "key"],
     ["c", "key"],
@@ -60,14 +61,14 @@ export const KeyBoard = () => {
     [",", "key"],
     [".", "key"],
     ["/", "key"],
-    ["Shift", "key lshift"],
+    ["Shift", "key rshift"],
   ];
   const row5 = [
     ["Ctrl", "key ctrl"],
     ["Fn", "key fn"],
     ["Win", "key win"],
     ["Alt", "key alt"],
-    ["", "key space"],
+    [" ", "key space"],
     ["Alt", "key alt"],
     ["Ctrl", "key ctrl"],
     ["Home", "key"],
@@ -75,28 +76,67 @@ export const KeyBoard = () => {
     ["End", "key"],
   ];
   const rows = [[...row1], [...row2], [...row3], [...row4], [...row5]];
+  const str =
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam odio inventore, aut necessitatibus a sed sapiente repudiandae, sunt amet consequuntur iste illum iusto culpa id excepturi, cupiditate reprehenderit ratione laudantium.";
 
+  const [indexLetter, setIndexLetter] = useState(0);
+  const [wrongIndexLetter, setWrongIndexLetter] = useState([]);
+  const [notPressetLetters, setNotPressetLetters] = useState(str);
+  const [pressetLetters, setPressetLetters] = useState("");
   const [activeButton, setActiveButton] = useState("");
 
+  const countingLetters = () => {
+    const chengeStr = notPressetLetters.slice(1);
+    const firstLetter = pressetLetters + notPressetLetters[0];
+    setIndexLetter(indexLetter + 1);
+    setNotPressetLetters(chengeStr);
+    setPressetLetters(firstLetter);
+  };
+
+  const onKeypress = (e) => {
+    // console.log(e);
+    // if (e.keyCode === 13) {
+    //   console.log("Enter press");
+    // }
+
+    if (e.key === str[indexLetter]) {
+      countingLetters();
+    }
+    if (!(e.key === str[indexLetter])) {
+      countingLetters();
+      setWrongIndexLetter([...wrongIndexLetter, indexLetter]);
+    }
+
+    setActiveButton(e.key);
+  };
+
   useEffect(() => {
-    const onKeypress = (e) => {
-      // console.log(e);
-      if (e.keyCode == 13) {
-        console.log("Enter press");
-      }
-      setActiveButton(e.key);
-    };
-
     document.addEventListener("keypress", onKeypress);
-
     return () => {
       document.removeEventListener("keypress", onKeypress);
     };
-  }, []);
+  }, [indexLetter]);
 
   return (
     <div className="keyboard">
       <div className="keyboard__container">
+        <div className="content">
+          <h1>
+            <span className="pressetLettert">
+              {pressetLetters &&
+                pressetLetters.split("").map((pressetLetter, index) =>
+                  wrongIndexLetter.includes(index) ? (
+                    <span key={index} className="whong-letter">
+                      {pressetLetter}
+                    </span>
+                  ) : (
+                    pressetLetter
+                  )
+                )}
+            </span>
+            {notPressetLetters}
+          </h1>
+        </div>
         <div className="keyboard__body">
           {rows.map((row, index) => (
             <div key={index} className="keyboard__line">
@@ -105,87 +145,12 @@ export const KeyBoard = () => {
                   key={index}
                   className={
                     activeButton === item[0] ? item[1] + " active" : item[1]
-                  }
-                  onKeyDown={(e) => console.log("ok")}>
+                  }>
                   {item[0]}
                 </div>
               ))}
             </div>
           ))}
-          {/* <div className="keyboard__line">
-            <div className="keyboard__key">~</div>
-            <div className="keyboard__key">1</div>
-            <div className="keyboard__key">2</div>
-            <div className="keyboard__key">3</div>
-            <div className="keyboard__key">4</div>
-            <div className="keyboard__key">5</div>
-            <div className="keyboard__key">6</div>
-            <div className="keyboard__key">7</div>
-            <div className="keyboard__key">8</div>
-            <div className="keyboard__key">9</div>
-            <div className="keyboard__key">10</div>
-            <div className="keyboard__key">-</div>
-            <div className="keyboard__key">+</div>
-            <div className="keyboard__key backspace">Backspace</div>
-          </div>
-          <div className="keyboard__line">
-            <div className="keyboard__key tab">Tab</div>
-            <div className="keyboard__key">q</div>
-            <div className="keyboard__key">w</div>
-            <div className="keyboard__key">e</div>
-            <div className="keyboard__key">r</div>
-            <div className="keyboard__key">t</div>
-            <div className="keyboard__key">y</div>
-            <div className="keyboard__key">u</div>
-            <div className="keyboard__key">i</div>
-            <div className="keyboard__key">o</div>
-            <div className="keyboard__key">p</div>
-            <div className="keyboard__key">[</div>
-            <div className="keyboard__key">]</div>
-            <div className="keyboard__key plug"></div>
-          </div>
-          <div className="keyboard__line">
-            <div className="keyboard__key capsLock">CapsLock</div>
-            <div className="keyboard__key">a</div>
-            <div className="keyboard__key">s</div>
-            <div className="keyboard__key">d</div>
-            <div className="keyboard__key">f</div>
-            <div className="keyboard__key">g</div>
-            <div className="keyboard__key">h</div>
-            <div className="keyboard__key">j</div>
-            <div className="keyboard__key">k</div>
-            <div className="keyboard__key">l</div>
-            <div className="keyboard__key">;</div>
-            <div className="keyboard__key">'</div>
-            <div className="keyboard__key enter">Enter</div>
-          </div>
-          <div className="keyboard__line">
-            <div className="keyboard__key lshift">Shift</div>
-            <div className="keyboard__key">z</div>
-            <div className="keyboard__key">x</div>
-            <div className="keyboard__key">c</div>
-            <div className="keyboard__key">v</div>
-            <div className="keyboard__key">b</div>
-            <div className="keyboard__key">n</div>
-            <div className="keyboard__key">m</div>
-            <div className="keyboard__key">,</div>
-            <div className="keyboard__key">.</div>
-            <div className="keyboard__key">/</div>
-            <div className="keyboard__key rshift">Shift</div>
-          </div>
-          <div className="keyboard__line">
-            <div className="keyboard__key ctrl">Ctrl</div>
-            <div className="keyboard__key fn">Fn</div>
-            <div className="keyboard__key win">Win</div>
-            <div className="keyboard__key alt">Alt</div>
-            <div className="keyboard__key space"></div>
-            <div className="keyboard__key alt">Alt</div>
-            <div className="keyboard__key ctrl">Ctrl</div>
-            <div className="keyboard__key"></div>
-            <div className="keyboard__key"></div>
-            <div className="keyboard__key"></div>
-            <div className="keyboard__key"></div>
-          </div> */}
         </div>
       </div>
     </div>
