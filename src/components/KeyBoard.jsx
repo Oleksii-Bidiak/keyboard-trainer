@@ -1,89 +1,14 @@
+import { act } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "../styles/components/keyboard.scss";
+import { rows } from "../utils/keys";
 
-export const KeyBoard = () => {
-  const row1 = [
-    ["~", "key"],
-    ["1", "key"],
-    ["2", "key"],
-    ["3", "key"],
-    ["4", "key"],
-    ["5", "key"],
-    ["6", "key"],
-    ["7", "key"],
-    ["8", "key"],
-    ["9", "key"],
-    ["0", "key"],
-    ["-", "key"],
-    ["=", "key"],
-    ["Backspace", "key backspace"],
-  ];
-  const row2 = [
-    ["Tab", "key tab"],
-    ["q", "key"],
-    ["w", "key"],
-    ["e", "key"],
-    ["r", "key"],
-    ["t", "key"],
-    ["y", "key"],
-    ["u", "key"],
-    ["i", "key"],
-    ["o", "key"],
-    ["p", "key"],
-    ["[", "key"],
-    ["]", "key"],
-    ["  ", "key"],
-  ];
-  const row3 = [
-    ["CapsLock", "key capsLock"],
-    ["a", "key"],
-    ["s", "key"],
-    ["d", "key"],
-    ["f", "key"],
-    ["g", "key"],
-    ["h", "key"],
-    ["j", "key"],
-    ["k", "key"],
-    ["l", "key"],
-    [";", "key"],
-    ["'", "key"],
-    ["Enter", "key enter"],
-  ];
-  const row4 = [
-    ["Shift", "key lshift"],
-    ["z", "key"],
-    ["x", "key"],
-    ["c", "key"],
-    ["v", "key"],
-    ["b", "key"],
-    ["n", "key"],
-    ["m", "key"],
-    [",", "key"],
-    [".", "key"],
-    ["/", "key"],
-    ["Shift", "key rshift"],
-  ];
-  const row5 = [
-    ["Ctrl", "key ctrl"],
-    ["Fn", "key fn"],
-    ["Win", "key win"],
-    ["Alt", "key alt"],
-    [" ", "key space"],
-    ["Alt", "key alt"],
-    ["Ctrl", "key ctrl"],
-    ["Home", "key"],
-    ["Arr", "key"],
-    ["End", "key"],
-  ];
-  const rows = [[...row1], [...row2], [...row3], [...row4], [...row5]];
-  const str =
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam odio inventore, aut necessitatibus a sed sapiente repudiandae, sunt amet consequuntur iste illum iusto culpa id excepturi, cupiditate reprehenderit ratione laudantium.";
-
+export const KeyBoard = ({ startText }) => {
   const [indexLetter, setIndexLetter] = useState(0);
   const [wrongIndexLetter, setWrongIndexLetter] = useState([]);
-  const [notPressetLetters, setNotPressetLetters] = useState(str);
+  const [notPressetLetters, setNotPressetLetters] = useState(startText);
   const [pressetLetters, setPressetLetters] = useState("");
-  const [activeButton, setActiveButton] = useState("");
+  const [activeButton, setActiveButton] = useState([]);
 
   const countingLetters = () => {
     const chengeStr = notPressetLetters.slice(1);
@@ -99,21 +24,35 @@ export const KeyBoard = () => {
     //   console.log("Enter press");
     // }
 
-    if (e.key === str[indexLetter]) {
+    if (e.key === startText[indexLetter]) {
       countingLetters();
     }
-    if (!(e.key === str[indexLetter])) {
+    if (!(e.key === startText[indexLetter])) {
       countingLetters();
       setWrongIndexLetter([...wrongIndexLetter, indexLetter]);
     }
 
-    setActiveButton(e.key);
+    setActiveButton([...activeButton, e.key]);
+  };
+
+  const keyup = () => {
+    setTimeout(() => {
+      setActiveButton((activeButton) => {
+        if (activeButton) {
+          activeButton.shift();
+          setActiveButton([...activeButton.splice(1)]);
+        }
+      });
+    }, 300);
   };
 
   useEffect(() => {
     document.addEventListener("keypress", onKeypress);
+    document.addEventListener("keyup", keyup);
+
     return () => {
       document.removeEventListener("keypress", onKeypress);
+      document.removeEventListener("keyup", keyup);
     };
   }, [indexLetter]);
 
@@ -144,8 +83,12 @@ export const KeyBoard = () => {
                 <div
                   key={index}
                   className={
-                    activeButton === item[0] ? item[1] + " active" : item[1]
-                  }>
+                    activeButton &&
+                    activeButton[activeButton.length - 1] === item[0]
+                      ? item[1] + " active"
+                      : item[1]
+                  }
+                  onKeypress={() => console.log("presset")}>
                   {item[0]}
                 </div>
               ))}
