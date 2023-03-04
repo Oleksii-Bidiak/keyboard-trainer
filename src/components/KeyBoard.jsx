@@ -1,4 +1,3 @@
-import { act } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "../styles/components/keyboard.scss";
 import { rows } from "../utils/keys";
@@ -23,6 +22,10 @@ export const KeyBoard = ({ startText }) => {
     // if (e.keyCode === 13) {
     //   console.log("Enter press");
     // }
+
+    if (!notPressetLetters) {
+      return null;
+    }
 
     if (e.key === startText[indexLetter]) {
       countingLetters();
