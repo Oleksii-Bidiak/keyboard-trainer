@@ -1,4 +1,3 @@
-import { act } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "../styles/components/keyboard.scss";
 import { rows } from "../utils/keys";
@@ -8,14 +7,21 @@ export const KeyBoard = ({ startText }) => {
   const [wrongIndexLetter, setWrongIndexLetter] = useState([]);
   const [notPressetLetters, setNotPressetLetters] = useState(startText);
   const [pressetLetters, setPressetLetters] = useState("");
-  const [activeButton, setActiveButton] = useState([]);
+  const [activeButton, setActiveButton] = useState("");
 
-  const countingLetters = () => {
+  const countingLetters = (e) => {
     const chengeStr = notPressetLetters.slice(1);
     const firstLetter = pressetLetters + notPressetLetters[0];
     setIndexLetter(indexLetter + 1);
     setNotPressetLetters(chengeStr);
     setPressetLetters(firstLetter);
+    if (e.key !== activeButton) {
+      setActiveButton(e.key);
+    } else {
+      // ! Fix this!
+      setActiveButton("");
+      setActiveButton(e.key);
+    }
   };
 
   const onKeypress = (e) => {
@@ -24,35 +30,22 @@ export const KeyBoard = ({ startText }) => {
     //   console.log("Enter press");
     // }
 
-    if (e.key === startText[indexLetter]) {
-      countingLetters();
+    if (!notPressetLetters) {
+      return null;
     }
+
+    countingLetters(e);
+
     if (!(e.key === startText[indexLetter])) {
-      countingLetters();
       setWrongIndexLetter([...wrongIndexLetter, indexLetter]);
     }
-
-    setActiveButton([...activeButton, e.key]);
-  };
-
-  const keyup = () => {
-    setTimeout(() => {
-      setActiveButton((activeButton) => {
-        if (activeButton) {
-          activeButton.shift();
-          setActiveButton([...activeButton.splice(1)]);
-        }
-      });
-    }, 300);
   };
 
   useEffect(() => {
     document.addEventListener("keypress", onKeypress);
-    document.addEventListener("keyup", keyup);
 
     return () => {
       document.removeEventListener("keypress", onKeypress);
-      document.removeEventListener("keyup", keyup);
     };
   }, [indexLetter]);
 
@@ -82,13 +75,12 @@ export const KeyBoard = ({ startText }) => {
               {row.map((item, index) => (
                 <div
                   key={index}
+                  // className={
+                  //   activeButton === item[0] ? item[1] + " active" : item[1]
+                  // }
                   className={
-                    activeButton &&
-                    activeButton[activeButton.length - 1] === item[0]
-                      ? item[1] + " active"
-                      : item[1]
-                  }
-                  onKeypress={() => console.log("presset")}>
+                    activeButton === item[0] ? item[1] + " active" : item[1]
+                  }>
                   {item[0]}
                 </div>
               ))}
