@@ -1,0 +1,9 @@
+/dist
+/build
+*.scss
+*.css
+/.next
+/node_modules
+/build
+/src/__mock__
+/src/__test__
