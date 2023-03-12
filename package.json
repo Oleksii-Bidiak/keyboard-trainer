@@ -59,13 +59,10 @@
     "normalize.css": "^8.0.1"
   },
   "lint-staged": {
-    "**/*js": [
-      "eslint --fix",
-      "prettier --write --ignore-unknown"
-    ],
-    "**/*jsx": [
-      "eslint --fix",
-      "prettier --write --ignore-unknown"
-    ]
+   "src/**/*.{js,jsx,ts,tsx,json,css}": [
+		"prettier --write",
+		"eslint --fix src/",
+		"git add"
+  ]
   }
 }

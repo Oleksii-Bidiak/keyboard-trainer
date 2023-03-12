@@ -20,9 +20,9 @@ export const KeyBoard = ({ startText }) => {
 	}
 
 	const onKeypress = e => {
-		// console.log(e);
+		// console.log(e)
 		// if (e.keyCode === 13) {
-		//   console.log("Enter press");
+		// 	console.log('Enter press')
 		// }
 
 		if (!notPressetLetters) {
