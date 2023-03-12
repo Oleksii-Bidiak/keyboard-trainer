@@ -15,13 +15,8 @@ export const KeyBoard = ({ startText }) => {
 		setIndexLetter(indexLetter + 1)
 		setNotPressetLetters(chengeStr)
 		setPressetLetters(firstLetter)
-		if (e.key !== activeButton) {
-			setActiveButton(e.key)
-		} else {
-			// ! Fix this!
-			setActiveButton('')
-			setActiveButton(e.key)
-		}
+		const newActiveButton = e.key
+		setActiveButton(newActiveButton)
 	}
 
 	const onKeypress = e => {
@@ -41,11 +36,16 @@ export const KeyBoard = ({ startText }) => {
 		}
 	}
 
-	useEffect(() => {
-		document.addEventListener('keypress', onKeypress)
+	const onKeyup = e => {
+		setActiveButton('')
+	}
 
+	useEffect(() => {
+		document.addEventListener('keydown', onKeypress)
+		document.addEventListener('keyup', onKeyup)
 		return () => {
-			document.removeEventListener('keypress', onKeypress)
+			document.removeEventListener('keydown', onKeypress)
+			document.removeEventListener('keyup', onKeyup)
 		}
 	}, [indexLetter])
 
@@ -79,13 +79,15 @@ export const KeyBoard = ({ startText }) => {
 							{row.map((item, index) => (
 								<div
 									key={index}
-									// className={
-									//   activeButton === item[0] ? item[1] + " active" : item[1]
-									// }
-									className={
+									className={item[1]}
+									style={
 										activeButton === item[0]
-											? `${item[1]} active`
-											: item[1]
+											? {
+													backgroundColor:
+														'rgba(59, 59, 148, 0.884)',
+													border: '2px solid rgba(59, 59, 148, 0.884)',
+											  }
+											: {}
 									}>
 									{item[0]}
 								</div>

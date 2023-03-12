@@ -40,12 +40,16 @@
 			"warn",
 			{ "blocks": "never", "classes": "always", "switches": "never" }
 		],
+		"arrow-parens":"off",
+		"no-confusing-arrow":"off",
+		"function-paren-newline":"off",
+		"operator-linebreak": "off",
+		"implicit-arrow-linebreak":"off",
 		"import/no-extraneous-dependencies": "off",
 		"import/no-cycle": "off",
 		"import/no-duplicates": "error",
 		"no-prototype-builtins": "error",
 		"no-restricted-syntax": "off", // need sort it out
-		"implicit-arrow-linebreak": ["error", "below"],
 		"camelcase": "off",
 		"max-classes-per-file": ["error", { "max": 2 }],
 		"no-shadow": "off", // a lot of errors
@@ -61,8 +65,8 @@
 		"no-unused-vars": "off",
 		"no-throw-literal": "off",
 		"no-trailing-spaces": "off",
-		"no-return-assign": "error",
 		"no-useless-return": "off",
+		"no-mixed-spaces-and-tabs":"off",
 		"no-empty": ["error", { "allowEmptyCatch": true }],
 		"no-fallthrough": "error",
 		"operator-assignment": "off",
@@ -88,7 +92,8 @@
 		"import/no-unresolved": "off",
 		"class-methods-use-this": "error",
 		"no-param-reassign": ["off", { "props": false }],
-		"linebreak-style": ["error", "windows"]
+		"linebreak-style": ["off", "windows"],
+		"no-return-assign":"off"
 	},
 	"settings": {
 		"import/resolver": {
