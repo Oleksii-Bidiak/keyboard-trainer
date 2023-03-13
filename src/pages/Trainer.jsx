@@ -1,6 +1,6 @@
 import React from 'react'
-import { KeyBoard } from '../components/KeyBoard'
+import { Keyboard } from '../components/Keyboard'
 
-export const Trainer = ({ startText }) => {
-	return <KeyBoard startText={startText} />
+export const Trainer = () => {
+	return <Keyboard />
 }

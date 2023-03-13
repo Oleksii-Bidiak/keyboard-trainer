@@ -71,10 +71,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx'],
-		//  alias: {
-		//    "@stylesComp": path.resolve(__dirname, "src/styles/components"),
-		//    "@": path.resolve(__dirname, "src"),
-		//  },
+		alias: {
+			'@stylesComp': path.resolve(__dirname, 'src/styles/components'),
+			'@': path.resolve(__dirname, 'src'),
+		},
 	},
 	optimization: optimization(),
 	devServer: {
@@ -82,7 +82,7 @@ module.exports = {
 			directory: path.join(__dirname, 'src'),
 		},
 		compress: true,
-		port: 9000,
+		port: 3000,
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

@@ -1,53 +1,77 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../styles/components/keyboard.scss'
 import { rows } from '../utils/keys'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	addWrongIndexLetter,
+	countLetters,
+	setActiveButton,
+	setNotPressetLetter,
+	setNotPressetLetters,
+	setPressetLetters,
+} from '../store/reducers/keyboardSlice'
 
-export const KeyBoard = ({ startText }) => {
-	const [indexLetter, setIndexLetter] = useState(0)
-	const [wrongIndexLetter, setWrongIndexLetter] = useState([])
-	const [notPressetLetters, setNotPressetLetters] = useState(startText)
-	const [pressetLetters, setPressetLetters] = useState('')
-	const [activeButton, setActiveButton] = useState('')
+export const Keyboard = () => {
+	// const [notPressetLetters, setNotPressetLetters] = useState(startText)
+	// const [pressetLetters, setPressetLetters] = useState('')
+
+	const indexLetter = useSelector(state => state.keyboard.indexLetter)
+	const defaultText = useSelector(state => state.keyboard.defaultText)
+	const wrongIndexLetter = useSelector(
+		state => state.keyboard.wrongIndexLetter,
+	)
+	const activeButton = useSelector(state => state.keyboard.activeButton)
+	const pressetLetters = useSelector(state => state.keyboard.pressetLetters)
+	const notPressetLetters = useSelector(
+		state => state.keyboard.notPressetLetters,
+	)
+
+	const dispatch = useDispatch()
 
 	const countingLetters = e => {
 		const chengeStr = notPressetLetters.slice(1)
 		const firstLetter = pressetLetters + notPressetLetters[0]
-		setIndexLetter(indexLetter + 1)
-		setNotPressetLetters(chengeStr)
-		setPressetLetters(firstLetter)
-		const newActiveButton = e.key
-		setActiveButton(newActiveButton)
+		dispatch(countLetters())
+		dispatch(setNotPressetLetters(chengeStr))
+		dispatch(setPressetLetters(firstLetter))
+		setPressetLetters(pressetLetters + notPressetLetters[0])
+		dispatch(setActiveButton(e.key))
 	}
 
 	const onKeypress = e => {
-		console.log(e)
-		if (e.keyCode === 13) {
-			console.log('Enter press')
-		}
-
-		if (!notPressetLetters) {
+		if (!notPressetLetters || e.keyCode === 16) {
 			return null
 		}
 
 		countingLetters(e)
 
-		if (!(e.key === startText[indexLetter])) {
-			setWrongIndexLetter([...wrongIndexLetter, indexLetter])
+		if (!(e.key === defaultText[indexLetter])) {
+			dispatch(addWrongIndexLetter(indexLetter))
 		}
 	}
 
-	const onKeyup = e => {
-		setActiveButton('')
+	const onKeyup = () => {
+		dispatch(setActiveButton(''))
 	}
 
 	useEffect(() => {
 		document.addEventListener('keydown', onKeypress)
-		document.addEventListener('keyup', onKeyup)
+		console.log(activeButton)
 		return () => {
 			document.removeEventListener('keydown', onKeypress)
+		}
+	})
+
+	useEffect(() => {
+		document.addEventListener('keyup', onKeyup)
+		return () => {
 			document.removeEventListener('keyup', onKeyup)
 		}
-	}, [indexLetter])
+	}, [activeButton])
+
+	useEffect(() => {
+		dispatch(setNotPressetLetter())
+	}, [])
 
 	return (
 		<div className='keyboard'>

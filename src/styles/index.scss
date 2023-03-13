@@ -50,6 +50,8 @@ $mobileSmall: em(479.98); // Телефоны S
 @import "base/null";
 
 body {
+	background: rgb(42, 42, 42);
+	color: #fff;
 
 	// Скролл заблокирован
 	.lock & {
@@ -80,6 +82,12 @@ body {
 	}
 }
 
+.page {
+	>main {
+		flex: 1 1 auto;
+	}
+}
+
 [class*="__container"] {
 	@if ($maxWidthContainer>0) {
 		max-width: rem($maxWidthContainer);
@@ -93,7 +101,3 @@ body {
 }
 
 //========================================================================================================================================================
-
-.page {
-	background: rgb(42, 42, 42);
-}
