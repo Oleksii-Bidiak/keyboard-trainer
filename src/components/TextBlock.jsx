@@ -1,7 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-export const TextBlock = () => (
-	<div className='content'>
+export const TextBlock = () => {
+	const pressetLetters = useSelector(state => state.simulator.pressetLetters)
+	const notPressetLetters = useSelector(
+		state => state.simulator.notPressetLetters,
+	)
+	const wrongIndexLetter = useSelector(
+		state => state.simulator.wrongIndexLetter,
+	)
+	return (
 		<h1>
 			<span className='pressetLettert'>
 				{pressetLetters &&
@@ -17,5 +25,5 @@ export const TextBlock = () => (
 			</span>
 			{notPressetLetters}
 		</h1>
-	</div>
-)
+	)
+}

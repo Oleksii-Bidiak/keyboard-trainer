@@ -1,4 +1,6 @@
-.keyboard {
+@import "./common/variables.scss";
+
+.simulator {
 	padding-top: 100px;
 	color: #fff;
 	font-size: 20px;
@@ -12,10 +14,9 @@
 	}
 
 	&__body {
-		// margin: 0 auto;
 		max-width: 1012px;
 		width: 100%;
-		border: 2px solid grey;
+		border: 2px solid $border;
 		border-radius: 4px;
 		padding: 10px;
 	}
@@ -37,9 +38,8 @@
 		max-width: 60px;
 		width: 100%;
 		line-height: 40px;
-		// flex: 0 0 60px;
 		border-radius: 4px;
-		border: 2px solid grey;
+		border: 2px solid $border;
 		padding: 4px;
 		cursor: pointer;
 		transition: all 0.3s ease 0s;
@@ -50,12 +50,12 @@
 
 		@keyframes keypress {
 			50% {
-				background-color: rgba(59, 59, 148, 0.884);
-				border: 2px solid rgba(59, 59, 148, 0.884);
+				background-color: $animBorder;
+				border: 2px solid $animBorder;
 			}
 
 			100% {
-				border: 2px solid grey;
+				border: 2px solid $border;
 				background-color: transparent;
 			}
 		}
@@ -85,46 +85,40 @@
 	}
 
 	.tab {
-		// flex: 0 0 80px;
 		max-width: 80px;
 		width: 100%;
 	}
 
 	.capsLock {
-		// flex: 0 0 100px;
 		max-width: 100px;
 		width: 100%;
 	}
 
 	.enter {
-		// flex: 0 0 110px;
 		max-width: 110px;
 		width: 100%;
 	}
 
 	.space {
-		// flex: 0 0 356px;
 		max-width: 356px;
 		width: 100%;
 	}
 
 	.lshift {
-		// flex: 0 0 120px;
 		max-width: 120px;
 		width: 100%;
 	}
 
 	.rshift {
-		// flex: 0 0 160px;
 		max-width: 160px;
 		width: 100%;
 	}
 }
 
 .pressetLettert {
-	color: grey;
+	color: $border;
 }
 
 .whong-letter {
-	color: red;
+	color: $wrongLetter;
 }

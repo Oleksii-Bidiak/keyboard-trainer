@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const keyboardSlice = createSlice({
-	name: 'keyboard',
+const simulatorSlice = createSlice({
+	name: 'simulator',
 	initialState: {
 		indexLetter: 0,
 		wrongIndexLetter: [],
@@ -33,7 +33,7 @@ const keyboardSlice = createSlice({
 	},
 })
 
-export default keyboardSlice.reducer
+export default simulatorSlice.reducer
 export const {
 	countLetters,
 	addWrongIndexLetter,
@@ -41,4 +41,4 @@ export const {
 	setNotPressetLetters,
 	setPressetLetters,
 	setNotPressetLetter,
-} = keyboardSlice.actions
+} = simulatorSlice.actions

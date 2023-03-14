@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import keyboardSlice from './reducers/keyboardSlice'
+import simulatorSlice from './reducers/simulatorSlice'
 
 const rootReducer = combineReducers({
-	keyboard: keyboardSlice,
+	simulator: simulatorSlice,
 })
 
 export const store = configureStore({

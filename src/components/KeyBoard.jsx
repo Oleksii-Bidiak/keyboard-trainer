@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import '../styles/components/keyboard.scss'
 import { rows } from '../utils/keys'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -9,37 +8,31 @@ import {
 	setNotPressetLetter,
 	setNotPressetLetters,
 	setPressetLetters,
-} from '../store/reducers/keyboardSlice'
+} from '../store/reducers/simulatorSlice'
+import { specificKeys } from '../utils/specificKeys'
 
 export const Keyboard = () => {
-	// const [notPressetLetters, setNotPressetLetters] = useState(startText)
-	// const [pressetLetters, setPressetLetters] = useState('')
-
-	const indexLetter = useSelector(state => state.keyboard.indexLetter)
-	const defaultText = useSelector(state => state.keyboard.defaultText)
-	const wrongIndexLetter = useSelector(
-		state => state.keyboard.wrongIndexLetter,
-	)
-	const activeButton = useSelector(state => state.keyboard.activeButton)
-	const pressetLetters = useSelector(state => state.keyboard.pressetLetters)
+	const indexLetter = useSelector(state => state.simulator.indexLetter)
+	const defaultText = useSelector(state => state.simulator.defaultText)
+	const activeButton = useSelector(state => state.simulator.activeButton)
+	const pressetLetters = useSelector(state => state.simulator.pressetLetters)
 	const notPressetLetters = useSelector(
-		state => state.keyboard.notPressetLetters,
+		state => state.simulator.notPressetLetters,
 	)
 
 	const dispatch = useDispatch()
-
 	const countingLetters = e => {
-		const chengeStr = notPressetLetters.slice(1)
-		const firstLetter = pressetLetters + notPressetLetters[0]
 		dispatch(countLetters())
-		dispatch(setNotPressetLetters(chengeStr))
-		dispatch(setPressetLetters(firstLetter))
-		setPressetLetters(pressetLetters + notPressetLetters[0])
+		dispatch(setNotPressetLetters(notPressetLetters.slice(1)))
+		dispatch(setPressetLetters(pressetLetters + notPressetLetters[0]))
 		dispatch(setActiveButton(e.key))
 	}
 
 	const onKeypress = e => {
-		if (!notPressetLetters || e.keyCode === 16) {
+		if (
+			!notPressetLetters ||
+			Object.values(specificKeys).includes(e.keyCode) // shift key
+		) {
 			return null
 		}
 
@@ -56,7 +49,6 @@ export const Keyboard = () => {
 
 	useEffect(() => {
 		document.addEventListener('keydown', onKeypress)
-		console.log(activeButton)
 		return () => {
 			document.removeEventListener('keydown', onKeypress)
 		}
@@ -74,52 +66,27 @@ export const Keyboard = () => {
 	}, [])
 
 	return (
-		<div className='keyboard'>
-			<div className='keyboard__container'>
-				<div className='content'>
-					<h1>
-						<span className='pressetLettert'>
-							{pressetLetters &&
-								pressetLetters
-									.split('')
-									.map((pressetLetter, index) =>
-										wrongIndexLetter.includes(index) ? (
-											<span
-												key={index}
-												className='whong-letter'>
-												{pressetLetter}
-											</span>
-										) : (
-											pressetLetter
-										),
-									)}
-						</span>
-						{notPressetLetters}
-					</h1>
-				</div>
-				<div className='keyboard__body'>
-					{rows.map((row, index) => (
-						<div key={index} className='keyboard__line'>
-							{row.map((item, index) => (
-								<div
-									key={index}
-									className={item[1]}
-									style={
-										activeButton === item[0]
-											? {
-													backgroundColor:
-														'rgba(59, 59, 148, 0.884)',
-													border: '2px solid rgba(59, 59, 148, 0.884)',
-											  }
-											: {}
-									}>
-									{item[0]}
-								</div>
-							))}
+		<div className='simulator__body'>
+			{rows.map((row, index) => (
+				<div key={index} className='simulator__line'>
+					{row.map((item, index) => (
+						<div
+							key={index}
+							className={item[1]}
+							style={
+								activeButton === item[0]
+									? {
+											backgroundColor:
+												'rgba(59, 59, 148, 0.884)',
+											border: '2px solid rgba(59, 59, 148, 0.884)',
+									  }
+									: {}
+							}>
+							{item[0]}
 						</div>
 					))}
 				</div>
-			</div>
+			))}
 		</div>
 	)
 }

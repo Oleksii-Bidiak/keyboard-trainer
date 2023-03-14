@@ -83,6 +83,7 @@ module.exports = {
 		},
 		compress: true,
 		port: 3000,
+		historyApiFallback: true,
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -128,14 +129,6 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: babelOptions(),
-				},
-			},
-			{
-				test: /\.m?ts$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: babelOptions('@babel/preset-typescript'),
 				},
 			},
 			{
