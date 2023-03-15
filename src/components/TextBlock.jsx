@@ -10,7 +10,7 @@ export const TextBlock = () => {
 		state => state.simulator.wrongIndexLetter,
 	)
 	return (
-		<h1>
+		<div className='training-text'>
 			<span className='pressetLettert'>
 				{pressetLetters &&
 					pressetLetters.split('').map((pressetLetter, index) =>
@@ -24,6 +24,6 @@ export const TextBlock = () => {
 					)}
 			</span>
 			{notPressetLetters}
-		</h1>
+		</div>
 	)
 }

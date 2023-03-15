@@ -1,0 +1,15 @@
+@use "sass:math";
+@import "../base/mixins.scss";
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-top: rem(10);
+	padding-bottom: rem(10);
+
+	&__logo {
+		max-width: rem(30);
+	}
+}

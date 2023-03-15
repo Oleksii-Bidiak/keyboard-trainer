@@ -1,0 +1,24 @@
+@use "sass:math";
+@import './base/mixins.scss';
+
+.home {
+	height: 100vh;
+}
+
+.main-screen {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__container {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		gap: rem(20);
+	}
+
+	&__logo {
+		max-width: rem(70);
+	}
+}
