@@ -72,8 +72,9 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		alias: {
-			'@stylesComp': path.resolve(__dirname, 'src/styles/components'),
-			'@': path.resolve(__dirname, 'src'),
+			Styles: path.resolve(__dirname, 'src/styles'),
+			Src: path.resolve(__dirname, 'src'),
+			Assets: path.resolve(__dirname, 'src/assets'),
 		},
 	},
 	optimization: optimization(),
@@ -120,8 +121,8 @@ module.exports = {
 				use: ['file-loader'],
 			},
 			{
-				test: /\.(ttf|woff|woff2|eot)$/,
-				use: ['file-loader'],
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource',
 			},
 			{
 				test: /\.m?js$/,
