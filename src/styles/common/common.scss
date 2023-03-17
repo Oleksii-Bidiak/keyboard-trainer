@@ -1,4 +1,5 @@
 @import '../base/mixins.scss';
+@import '../common/variables.scss';
 
 .title {
 	font-size: rem(60);
@@ -8,9 +9,34 @@
 	margin: 0 auto;
 	gap: rem(15);
 	text-align: end;
+	animation: start 0.5s none linear;
+	color: rgb(184, 183, 183);
 
 	span {
 		font-size: rem(26);
 		align-self: flex-end;
+		cursor: pointer;
+
+		@media (any-hover: hover) {
+			transition: all 0.3s ease 0s;
+
+			&:hover {
+				color: red;
+			}
+		}
+	}
+}
+
+@keyframes start {
+	0% {
+		color: $background;
+		opacity: 0;
+		transform: translate(0px, 20px);
+	}
+
+	100% {
+		color: rgb(184, 183, 183);
+		transform: translate(0px, 0px);
+		opacity: 1;
 	}
 }
