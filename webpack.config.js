@@ -38,10 +38,16 @@ const cssLoaders = extra => {
 			},
 		},
 		'css-loader',
+		'resolve-url-loader',
 	]
 
 	if (extra) {
-		loaders.push(extra)
+		loaders.push({
+			loader: extra,
+			options: {
+				sourceMap: true,
+			},
+		})
 	}
 
 	return loaders
@@ -118,7 +124,7 @@ module.exports = {
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader'],
+				type: 'asset/resource',
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
