@@ -1,3 +1,15 @@
+@font-face {
+	font-family: 'icons';
+	// src: url('../../assets/fonts/icons/fonts/icons.eot?oynlqm');
+	src: url('../../assets/fonts/icons/icons.eot?oynlqm#iefix') format('embedded-opentype'),
+		url('../../assets/fonts/icons/icons.ttf?oynlqm') format('truetype'),
+		url('../../assets/fonts/icons/icons.woff?oynlqm') format('woff'),
+		url('../../assets/fonts/icons/icons.svg?oynlqm#icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
 %ic {
 	font-family: "icons";
 	font-style: normal;
@@ -8,6 +20,7 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 [class*="_icon-"] {
 	&:before {
 		@extend %ic;
@@ -15,3 +28,30 @@
 	}
 }
 
+._icon-skull:before {
+	content: "\e906";
+}
+
+._icon-speed:before {
+	content: "\e900";
+}
+
+._icon-statistics:before {
+	content: "\e901";
+}
+
+._icon-github:before {
+	content: "\e902";
+}
+
+._icon-linkedin:before {
+	content: "\e903";
+}
+
+._icon-precision:before {
+	content: "\e904";
+}
+
+._icon-settings:before {
+	content: "\e905";
+}
