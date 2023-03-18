@@ -16,7 +16,7 @@ export const Home = () => {
 						/>
 						<h1 className='main-screen__title title'>
 							Keyboard Simulator
-							<span className='title__link'>
+							<span className='title__link _icon-skull'>
 								<Link to='/simulator'>Get started</Link>
 							</span>
 						</h1>

@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
 	addWrongIndexLetter,
 	countLetters,
+	restart,
 	setActiveButton,
 	setNotPressetLetter,
 	setNotPressetLetters,
 	setPressetLetters,
 } from '../store/reducers/simulatorSlice'
 import { specificKeys } from '../utils/specificKeys'
+import { setVisible } from '../store/reducers/modalSlice'
 
 export const Keyboard = () => {
 	const indexLetter = useSelector(state => state.simulator.indexLetter)
@@ -19,6 +21,7 @@ export const Keyboard = () => {
 	const notPressetLetters = useSelector(
 		state => state.simulator.notPressetLetters,
 	)
+	const isVisible = useSelector(state => state.modal.isVisible)
 
 	const dispatch = useDispatch()
 	const countingLetters = e => {
@@ -28,7 +31,16 @@ export const Keyboard = () => {
 		dispatch(setActiveButton(e.key))
 	}
 
+	const restartSimulation = () => {
+		dispatch(restart())
+	}
+
 	const onKeypress = e => {
+		if (isVisible && e.keyCode === 13) {
+			restartSimulation()
+			dispatch(setVisible(false))
+			return null
+		}
 		if (
 			!notPressetLetters ||
 			Object.values(specificKeys).includes(e.keyCode) // shift key
@@ -45,6 +57,9 @@ export const Keyboard = () => {
 
 	const onKeyup = () => {
 		dispatch(setActiveButton(''))
+		if (notPressetLetters.length === 0) {
+			dispatch(setVisible(true))
+		}
 	}
 
 	useEffect(() => {
@@ -59,7 +74,7 @@ export const Keyboard = () => {
 		return () => {
 			document.removeEventListener('keyup', onKeyup)
 		}
-	}, [activeButton])
+	})
 
 	useEffect(() => {
 		dispatch(setNotPressetLetter())

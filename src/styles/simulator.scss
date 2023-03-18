@@ -1,16 +1,30 @@
 @import "./common/variables.scss";
 
 .simulator {
+	height: 100vh;
 	padding-top: 100px;
+	padding-bottom: 50px;
 	color: #fff;
 	font-size: 20px;
+	display: flex;
+
 
 	&__container {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		gap: 50px;
+	}
+
+	// &__ {
+	// 	margin-bottom: rem(20);
+	// }
+
+	&__training-text {
+		flex: 1 1 auto;
+		text-align: center;
 	}
 
 	&__body {
@@ -124,3 +138,22 @@
 }
 
 // .training-text {}
+.modul {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(42, 42, 42, 0.7);
+
+	&__body {
+		padding: 15px;
+		width: 300px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: 20px;
+		margin: 0 0 0 auto;
+	}
+}

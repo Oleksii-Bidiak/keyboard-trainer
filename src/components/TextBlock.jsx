@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export const TextBlock = () => {
+export const TextBlock = ({ className }) => {
 	const pressetLetters = useSelector(state => state.simulator.pressetLetters)
 	const notPressetLetters = useSelector(
 		state => state.simulator.notPressetLetters,
@@ -10,7 +10,7 @@ export const TextBlock = () => {
 		state => state.simulator.wrongIndexLetter,
 	)
 	return (
-		<div className='training-text'>
+		<div className={`${className}__training-text training-text`}>
 			<span className='pressetLettert'>
 				{pressetLetters &&
 					pressetLetters.split('').map((pressetLetter, index) =>
