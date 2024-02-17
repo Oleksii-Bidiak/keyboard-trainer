@@ -1,0 +1,33 @@
+@use "sass:math";
+@import "../../styles/base/mixins.scss";
+
+.statistic-icon {
+	display: flex;
+	gap: rem(10);
+
+	&::before {
+		height: 60px;
+		width: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background-color: grey;
+		font-size: 30px;
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		gap: rem(5);
+	}
+
+	&__score {
+		font-size: rem(32);
+	}
+
+	&__unit-of-measurement {
+		font-size: rem(16);
+		color: grey;
+	}
+}

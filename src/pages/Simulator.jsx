@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Header } from '../components/Header'
 import { Keyboard } from '../components/Keyboard'
 import { ModulStatictic } from '../components/ModulStatictic'
+import { Settings } from '../components/Settings'
 import { TextBlock } from '../components/TextBlock'
 import { СurrentStatistic } from '../components/СurrentStatistic'
 import '../styles/simulator.scss'
@@ -16,7 +17,8 @@ export const Simulator = () => {
 			<main className='page'>
 				<div className='page__simulator simulator'>
 					<div className='simulator__container'>
-						<СurrentStatistic />
+						<Settings />
+						<СurrentStatistic className='simulator' />
 						<TextBlock className='simulator' />
 						<Keyboard />
 						{visible && <ModulStatictic />}

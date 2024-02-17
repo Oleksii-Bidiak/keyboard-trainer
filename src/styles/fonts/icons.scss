@@ -23,7 +23,7 @@
 [class*="_icon-"] {
 	&:before {
 		@extend %ic;
-		display: block;
+		// display: block;
 	}
 }
 

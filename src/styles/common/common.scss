@@ -9,13 +9,15 @@
 	margin: 0 auto;
 	gap: rem(15);
 	text-align: end;
-	animation: start 0.5s none linear;
+	animation: start 0.3s none linear;
 	color: rgb(184, 183, 183);
 
 	span {
 		font-size: rem(26);
 		align-self: flex-end;
 		cursor: pointer;
+		animation: startSpan 0.6s linear 0s;
+
 
 		@media (any-hover: hover) {
 			transition: all 0.3s ease 0s;
@@ -32,6 +34,26 @@
 		color: $background;
 		opacity: 0;
 		transform: translate(0px, 20px);
+	}
+
+	100% {
+		color: rgb(184, 183, 183);
+		transform: translate(0px, 0px);
+		opacity: 1;
+	}
+}
+
+@keyframes startSpan {
+	0% {
+		color: $background;
+		opacity: 0;
+		transform: translate(20px, 0px);
+	}
+
+	50% {
+		color: $background;
+		opacity: 0;
+		transform: translate(20px, 0px);
 	}
 
 	100% {
